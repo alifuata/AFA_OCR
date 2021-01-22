@@ -30,6 +30,7 @@ namespace Afa_OCR_2
                 filename = fd.FileName;
                 pictureBox1.Image = null;
                 pictureBox1.Load(filename);
+                bitmap =(Bitmap) Image.FromFile(filename);
             }
         }
         Dictionary<string, string> languages = new Dictionary<string, string>() { { "eng", "English" }, { "tur", "Turkish" }, { "fra", "French" }, { "deu", "German" }, { "spa", "Spanish" } };
@@ -52,23 +53,24 @@ namespace Afa_OCR_2
 
         private void btnOCR_Click(object sender, EventArgs e)
         {
-            if (filename.Length > 0)
-            {
-                Bitmap imgsource = (Bitmap)Image.FromFile(filename);
-                var ocrtext = string.Empty;
-                using (var engine = new TesseractEngine(@".\tessdata", cbLanguages.SelectedValue.ToString(), EngineMode.Default))
-                {
-                    using (var img = PixConverter.ToPix(imgsource))
-                    {
-                        using (var page = engine.Process(img))
-                        {
-                            ocrtext = page.GetText();
-                        }
-                    }
-                }
-                richTextBox1.Text = ocrtext;
-            }
-            else if (bitmap != null)
+            //if (filename.Length > 0)
+            //{
+            //    Bitmap imgsource = (Bitmap)Image.FromFile(filename);
+            //    var ocrtext = string.Empty;
+            //    using (var engine = new TesseractEngine(@".\tessdata", cbLanguages.SelectedValue.ToString(), EngineMode.Default))
+            //    {
+            //        using (var img = PixConverter.ToPix(imgsource))
+            //        {
+            //            using (var page = engine.Process(img))
+            //            {
+            //                ocrtext = page.GetText();
+            //            }
+            //        }
+            //    }
+            //    richTextBox1.Text = ocrtext;
+            //}
+            //else 
+            if (bitmap != null)
             {
                 //Bitmap imgsource = (Bitmap)Image.FromFile(filename);
                 var ocrtext = string.Empty;
